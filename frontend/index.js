@@ -38,7 +38,7 @@ function renderUserList(users) {
         })
         .join("");
     dataContainer.innerHTML = markup;
-    updatePost();
+    updatePut();
 }
 
 fetchUsers()
@@ -54,8 +54,11 @@ function getBtn(users) {
         const btnConfirm = document.getElementById(`confirm-${user._id}`);
         const btnTrash = document.getElementById(`trash-${user._id}`);
         const trs = document.getElementById(`${user._id}`);
+        let newData = { name: `${user.name}`, email: `${user.email}`, phone: `${user.phone}` }
+        console.log(newData)
         btnSave.addEventListener("click", () => {
-            updatePost();
+            putFetch(trs.id, newData);
+
         });
         btnTrash.addEventListener("click", () => {
             btnSave.classList.add("hidden");
@@ -90,6 +93,7 @@ function addRow() {
         }
     }
     tableBody.appendChild(newRow);
+    updatePut()
 }
 
 function removeAllItems() {
@@ -104,11 +108,23 @@ function removeAllItems() {
     });
 }
 
-function updatePost() {
+function updatePut() {
     [...document.querySelectorAll("td")].forEach((el) => {
         el.addEventListener("click", (e) => {
             e.target.contentEditable = true;
             e.target.focus();
+            console.log(e.target.textContent)
         });
     });
+}
+
+function putFetch(id, obj) {
+    const options = {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(obj)
+    }
+    fetch(`${baseURL}/api/data/${id}`, options)
 }
