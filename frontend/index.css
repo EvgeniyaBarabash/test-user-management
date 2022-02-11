@@ -1,0 +1,21 @@
+#td-pen {
+  margin-right: 10px;
+}
+.td-trash {
+  margin-right: 10px;
+}
+#table_id {
+  width: 800px;
+  margin: auto;
+}
+#btn {
+  text-align: center;
+}
+.title {
+  text-align: center;
+  margin-bottom: 20px;
+  padding: 20px;
+}
+.hidden {
+  display: none !important;
+}
